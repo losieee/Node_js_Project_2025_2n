@@ -10,7 +10,7 @@ public class GameAPI : MonoBehaviour
 {
     private string baseUrl = "http://localhost:4000/api";
 
-    public IEnumerator ResgisterPlayer(string playerName, string password)
+    public IEnumerator RegisterPlayer(string playerName, string password)
     {
         var requestData = new { name = playerName, password = password };
         string jsonData = JsonConvert.SerializeObject(requestData);
