@@ -3,6 +3,7 @@ const fs = require('fs');
 const router = express.Router();
 
 //초기 자원 설정
+    const resourceFilePath = 'resources.json';
 
 const initalResources = {
 
@@ -26,7 +27,7 @@ router.post('/register', (req, res) => {
 
         playerName : name,
         password : password,
-        resource: {
+        resources: {
            metal : 500,
            crystal : 300,
            deuterium : 100
@@ -54,6 +55,8 @@ router.post('/login', (req, res) => {
         return res.status(401).send({message : '비밀번호가 틀렸습니다.'});
     }
 
+    const player = global.players[name];
+
     const reqponsePayLoad = {
         playerName: player.playerName,
         metal : player.resources.metal,
@@ -65,5 +68,11 @@ router.post('/login', (req, res) => {
     console.log("Login response playload : ", reqponsePayLoad);
     res.send(reqponsePayLoad);
 });
+
+function saveResources()
+    {
+        fs.writeFileSync(resourceFilePath, JSON.stringify(global.players, null, 2));
+    }
+
 
 module.exports = router;
