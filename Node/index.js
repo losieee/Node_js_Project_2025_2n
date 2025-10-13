@@ -6,7 +6,7 @@
 
     app.use(express.json());
     app.use('/api', playerRoutes);
-    const resourceFilePath = 'resources.json';
+ const resourceFilePath = 'resources.json';
 
 
     loadResource();
@@ -24,10 +24,6 @@
         }
     }
 
-    function saveResources()
-    {
-        fs.writeFileSync(resourceFilePath, JSON.stringify(global.players, null, 2));
-    }
 
     app.listen(port, ()=> 
     {
